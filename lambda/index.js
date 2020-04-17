@@ -15,9 +15,11 @@ exports.handler = async (event, context) => {
     const promises = [];
     event.Records.forEach( record => {
       const payload = Buffer.from(record.kinesis.data, 'base64').toString('utf8')
-      const { key, log } = logParser(payload)
-
-      promises.push(upload(key, log))
+      const parsed = logParser(payload)
+      if(parsed && parsed.key && parsed.log) {
+        const { key, log } = parsed
+        promises.push(upload(key, log))
+      }
     })
 
     await Promise.all(promises)
@@ -41,6 +43,7 @@ exports.handler = async (event, context) => {
 
 function logParser(log) {
   try {
+    if(!log) return
     const formatted = {}
 
     const baseSplited = log.split('"');
