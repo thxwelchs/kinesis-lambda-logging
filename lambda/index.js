@@ -14,13 +14,13 @@ exports.handler = async (event, context) => {
     /* Process the list of records and transform them */
     const promises = [];
     event.Records.forEach( record => {
-      const payload = Buffer.from(record.kinesis.data, 'base64').toString('ascii')
+      const payload = Buffer.from(record.kinesis.data, 'base64').toString('utf8')
+      const { key, log } = logParser(payload)
 
-      promises.push(upload('asdfasdfasdfasdf', payload))
+      promises.push(upload(key, log))
     })
 
     await Promise.all(promises)
-
 
     /* FireHose Lambda Trigger Code */
     // const output = event.records.map((record) => {
@@ -47,19 +47,23 @@ function logParser(log) {
     const hostSplited = baseSplited[0].split(' ')
     const requestSplited = baseSplited[1].split(' ')
 
+    const time = moment(hostSplited[3].split('[')[1], 'DD/MMM/YYYY:HH:mm:ss')
+
     formatted.host = hostSplited[0]
-    formatted.time = hostSplited[3].split('[')[1]
+    formatted.time = time
     formatted.method = requestSplited[0]
     formatted.path = requestSplited[1]
     formatted.httpVersion = requestSplited[2]
     formatted.status = +(baseSplited[2].split(' ')[1])
     formatted.userAgent = baseSplited[5]
 
-    return JSON.stringify(formatted)
-
+    return { 
+      key: `web-log/${time.utc().format('YYYY/MM/DD/HH')}/web-log.log`,
+      log: JSON.stringify(formatted) + '\n'
+    }
   } catch(err) {
     console.error(err)
-    return ''
+    return
   }
 }
 
