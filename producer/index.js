@@ -64,8 +64,7 @@ async function logFileRead(path) {
   })
 }
 
-// logFileRead(`C:/Users/LeeTaeHun/project/kakaobank/access.log`);
 
 cron.schedule('* * * * *', () => {
-  logFileRead(`C:/Users/LeeTaeHun/project/kakaobank/access.log`)
+  logFileRead(`/var/log/nginx/access.log`)
 });
