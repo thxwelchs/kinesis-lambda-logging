@@ -18,17 +18,17 @@ Localstack dashboard graph
 
 ### AWS Resource 생성 절차
 
-1. S3 Bucket 생성
-2. Kinesis Data Stream 생성  
-3. Lambda 함수 생성 (Runtime: Node.js 12.x)
-4. 생성한 Lambda 함수 Kinesis Data Stream에 event-source mapping
+1. *S3 Bucket* 생성
+2. *Kinesis Data Stream* 생성  
+3. *Lambda 함수 생성* (Runtime: Node.js 12.x)
+4. *생성한 Lambda 함수 Kinesis Data Stream에 event-source mapping*
 
 ### Data pipeline 절차
 
 1. Node.js로 작성된 producer 역할의 애플리케이션이 1분 주기로 웹서버(nginx)의 접근 로그를 polling 하고 Kinesis에 record 저장 
 2. Lambda 함수에 맵핑 되어 있는 설정에 따라 Stream에 데이터 저장 시 트리거링 되어 Lambda 함수 실행
-3. S3 bucket에 UTC 타임 기준, YYYY/MM/DD/HH 의 key 기준으로 분리하여 log 저장 
-(ex  2020/04/17/16/web-access.log, 2020년4월17일16시00분 ~ 2020년4월17일16시59분 까지의 로그 저장)
+3. S3 bucket에 UTC 타임 기준, `YYYY/MM/DD/HH` 의 key 기준으로 분리하여 log 저장 
+(ex  `2020/04/17/16/web-access.log`, 2020년4월17일16시00분 ~ 2020년4월17일16시59분 까지의 로그 저장)
 
 json format
 ```json
@@ -152,9 +152,9 @@ s3에 업로드 되었는지 확인 후 json화 되어있는지 확인
 
 ### AWS Resource 생성 절차
 
-1. S3 Bucket 생성
-2. stream data(firehose) transform lambda 함수 생성
-3. Kinesis Firehose Stream 생성, Process records에 lambda 함수 등록, 목적지 S3로 설정 
+1. *S3 Bucket* 생성
+2. *stream data(firehose) transform lambda* 함수 생성
+3. *Kinesis Firehose Stream* 생성, Process records에 *lambda* 함수 등록, 목적지 S3로 설정 
 
 ### Data pipeline 절차
 
