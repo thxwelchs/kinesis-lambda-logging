@@ -58,7 +58,9 @@ $ docker-compose up
 
 LOCALSTACK_HOST 환경 변수 값을 반드시 현재 docker-machine 의 ip로 pass, aws resource 를 생성하는 shell script에서 해당 값을 참조하게 되어 있습니다. (windows 일반적인 기준으로 192.168.99.100, mac, linux localhost일 시 생략 가능)
 
-    $ docker run -d -p 80:80 -e LOCALSTACK_HOST=$(docker-machine ip) [thxwelchs/kinesis-lambda-logging](https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging)
+```shell
+$ docker run -d -p 80:80 -e LOCALSTACK_HOST=$(docker-machine ip) thxwelchs/kinesis-lambda-logging
+```
 
 ![Untitled 2](https://user-images.githubusercontent.com/38197077/79625461-591ce500-8164-11ea-881e-45225a53362f.png)
 
