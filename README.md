@@ -128,6 +128,7 @@ fi
 ```
 
 resource 생성 확인
+\
 ![Untitled 3](https://user-images.githubusercontent.com/38197077/79625462-591ce500-8164-11ea-9ca9-9296bb1d58f5.png)
 ![Untitled 4](https://user-images.githubusercontent.com/38197077/79625463-59b57b80-8164-11ea-8a96-b2a1800b199b.png)
 ![Untitled 5](https://user-images.githubusercontent.com/38197077/79625465-5a4e1200-8164-11ea-88e2-1324243db3ca.png)
