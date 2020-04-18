@@ -10,11 +10,11 @@ AWS infra mocking tool인 Localstack을 활용하였습니다.
 
 Data pipeline diagram
 
-![images/undefined_(2).png](Untitled/undefined_(2).png)
+![undefined_(2)](https://user-images.githubusercontent.com/38197077/79625459-58844e80-8164-11ea-9b81-38246347192c.png)
 
 Localstack dashboard graph
 
-![images/Untitled.png](Untitled/Untitled.png)
+![Untitled](https://user-images.githubusercontent.com/38197077/79625474-5cb06c00-8164-11ea-8740-d31a68f60091.png)
 
 ### AWS Resource 생성 절차
 
@@ -30,17 +30,18 @@ Localstack dashboard graph
 3. S3 bucket에 UTC 타임 기준, YYYY/MM/DD/HH 의 key 기준으로 분리하여 log 저장 
 (ex  2020/04/17/16/web-access.log, 2020년4월17일16시00분 ~ 2020년4월17일16시59분 까지의 로그 저장)
 
-JSON Format
-
-    { 
-    	"host": "192.168.99.1",
-    	"time": "2020-04-18T01:42:18.000Z",
-    	"method": "GET",
-    	"path": "/",
-    	"httpVersion": "HTTP/1.1",
-    	"status": 200,
-    	"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"
-    }
+json format
+```json
+{ 
+	"host": "192.168.99.1",
+	"time": "2020-04-18T01:42:18.000Z",
+	"method": "GET",
+	"path": "/",
+	"httpVersion": "HTTP/1.1",
+	"status": 200,
+	"userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/80.0.3987.163 Safari/537.36"
+}
+```
 
 ### 검증
 
@@ -51,7 +52,7 @@ $ cd kinesis-lambda-logging
 $ docker-compose up
 ```
 
-![images/Untitled%201.png](Untitled/Untitled%201.png)
+![Untitled 1](https://user-images.githubusercontent.com/38197077/79625460-58844e80-8164-11ea-8c74-2aaca6568c26.png)
 
  
 
@@ -59,7 +60,7 @@ LOCALSTACK_HOST 환경 변수 값을 반드시 현재 docker-machine 의 ip로 p
 
     $ docker run -d -p 80:80 -e LOCALSTACK_HOST=$(docker-machine ip) [thxwelchs/kinesis-lambda-logging](https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging)
 
-![images/Untitled%202.png](Untitled/Untitled%202.png)
+![Untitled 2](https://user-images.githubusercontent.com/38197077/79625461-591ce500-8164-11ea-881e-45225a53362f.png)
 
 위 컨테이너 실행 시
 
@@ -125,34 +126,26 @@ fi
 ```
 
 resource 생성 확인
-
-![images/Untitled%203.png](Untitled/Untitled%203.png)
-
-![images/Untitled%204.png](Untitled/Untitled%204.png)
-
-![images/Untitled%205.png](Untitled/Untitled%205.png)
-
-![images/Untitled%206.png](Untitled/Untitled%206.png)
+![Untitled 3](https://user-images.githubusercontent.com/38197077/79625462-591ce500-8164-11ea-9ca9-9296bb1d58f5.png)
+![Untitled 4](https://user-images.githubusercontent.com/38197077/79625463-59b57b80-8164-11ea-8a96-b2a1800b199b.png)
+![Untitled 5](https://user-images.githubusercontent.com/38197077/79625465-5a4e1200-8164-11ea-88e2-1324243db3ca.png)
+![Untitled 6](https://user-images.githubusercontent.com/38197077/79625466-5a4e1200-8164-11ea-8d19-a44433ad3f93.png)
 
 nginx 접속해서 access.log 발생
 
-![images/Untitled%207.png](Untitled/Untitled%207.png)
+![Untitled 7](https://user-images.githubusercontent.com/38197077/79625467-5ae6a880-8164-11ea-9c10-3e0620e8b312.png)
 
 access.log 확인 후 producer가 정상적으로 stream에 record로 등록하는지 확인
-
-![images/Untitled%208.png](Untitled/Untitled%208.png)
-
-![images/Untitled%209.png](Untitled/Untitled%209.png)
+![Untitled 8](https://user-images.githubusercontent.com/38197077/79625469-5ae6a880-8164-11ea-8ce6-ca14472374fc.png)
+![Untitled 9](https://user-images.githubusercontent.com/38197077/79625470-5b7f3f00-8164-11ea-86d8-2be6c5626b57.png)
 
 s3에 업로드 되었는지 확인 후 json화 되어있는지 확인
-
-![images/Untitled%2010.png](Untitled/Untitled%2010.png)
-
-![images/Untitled%2011.png](Untitled/Untitled%2011.png)
+![Untitled 10](https://user-images.githubusercontent.com/38197077/79625471-5b7f3f00-8164-11ea-9ced-6d1cbc51e739.png)
+![Untitled 11](https://user-images.githubusercontent.com/38197077/79625472-5c17d580-8164-11ea-9a7b-1a162b5b3879.png)
 
 ## 실제 AWS 환경 구성
 
-![images/aws-kinesis.png](Untitled/aws-kinesis.png)
+![aws-kinesis](https://user-images.githubusercontent.com/38197077/79625458-57532180-8164-11ea-978a-568f87c1f7de.png)
 
 ### AWS Resource 생성 절차
 
@@ -169,12 +162,8 @@ s3에 업로드 되었는지 확인 후 json화 되어있는지 확인
 
 위 구성대로 HCL 작성중...
 
-> Link
-
-Docker image: [https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging](https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging)
-
-Dockerfile: [https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/Dockerfile](https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/Dockerfile)
-
-producer code: [https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/producer/index.js](https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/producer/index.js)
-
-lambda function code: [https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/lambda/index.js](https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/lambda/index.js)
+## Link
+> * Docker image: [https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging](https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging)
+> * Dockerfile: [https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/Dockerfile](https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/Dockerfile)
+> * producer code: [https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/producer/index.js](https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/producer/index.js)
+> * lambda function code: [https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/lambda/index.js](https://github.com/thxwelchs/kinesis-lambda-logging/blob/master/lambda/index.js)
