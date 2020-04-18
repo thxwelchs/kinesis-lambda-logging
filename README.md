@@ -5,7 +5,7 @@
 이 저장소는 AWS Kinesis Data Stream, Lambda, S3, Firehose, Terraform 등을 이용하여 웹 로깅 데이터 파이프라인을 구축 하는 것을 목표로 두고 있는 인프라 코드 관련 저장소입니다.
 
 AWS infra mocking tool인 Localstack을 활용하였습니다.
-인
+
 ## **Localstack 환경 구성**
 
 Data pipeline diagram
