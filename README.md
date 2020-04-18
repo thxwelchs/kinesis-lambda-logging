@@ -1,5 +1,3 @@
-# 과제 검증
-
 # **Kinesis lambda logging**
 
 이 저장소는 AWS Kinesis Data Stream, Lambda, S3, Firehose, Terraform 등을 이용하여 웹 로깅 데이터 파이프라인을 구축 하는 것을 목표로 두고 있는 인프라 코드 관련 저장소입니다.
