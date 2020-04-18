@@ -41,7 +41,11 @@ COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 # COPY cron-init.sh /root/cron-init.sh
 # RUN chmod +x /root/cron-init.sh
 
+# COPY wait-for-it.sh /root/wait-for-it.sh
+# RUN chmod +x /root/wait-for-it.sh
 
+# ENTRYPOINT ["/bin/bash", "-c"]
+# CMD ["./wait-for-it.sh", "${LOCALSTACK_HOST}:4572", "--strict", "--timeout=500", "--", "/usr/bin/supervisord"]
 CMD ["/usr/bin/supervisord"]
 
 EXPOSE 80
