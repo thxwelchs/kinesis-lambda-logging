@@ -44,7 +44,7 @@ if [ $LocalstackLive = 200 ]; then
 	# Lambda Kinesis에 event-source-mapping
 	if [ "$(aws --endpoint-url=http://$LOCALSTACK_HOST_IP:4574 lambda list-event-source-mappings --function-name stream-transformation --query "EventSourceMappings")" = '[]' ];
 	then
-		aws --endpoint-url=http://$LOCALSTACK_HOST_IP:4574 lambda create-event-source-mapping --function-name stream-transformation --event-source-arn $(aws --endpoint-url=http://$LOCALSTACK_HOST_IP:4568 kinesis describe-stream --stream-name $KINESIS_DATA_STREAM_NAME --query "StreamDescription.StreamARN" --output text --no-paginate) --batch-size 100 --starting-position TRIM_HORIZON
+		aws --endpoint-url=http://$LOCALSTACK_HOST_IP:4574 lambda create-event-source-mapping --function-name stream-transformation --event-source-arn $(aws --endpoint-url=http://$LOCALSTACK_HOST_IP:4568 kinesis describe-stream --stream-name $KINESIS_DATA_STREAM_NAME --query "StreamDescription.StreamARN" --output text --no-paginate) --batch-size 100 --starting-position LATEST
 	fi
 
 	echo "[$CURRENT_DATE] LOCALSTACK AWS에 resource 생성 완료"
