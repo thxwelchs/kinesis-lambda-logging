@@ -161,7 +161,17 @@ s3에 업로드 되었는지 확인 후 json화 되어있는지 확인
 3. S3 bucket에 UTC 타임 기준, YYYY/MM/DD/HH 의 key 기준으로 분리하여 log 저장 
 (ex  2020/04/17/16/web-access.log, 2020년4월17일16시00분 ~ 2020년4월17일16시59분 까지의 로그 저장)
 
-위 구성대로 HCL 작성중...
+
+# IaC
+LocalStack을 실행시킨 후
+```shell
+$ cd terraform
+$ terraform init
+$ terraform plan
+$ terraform apply
+```
+
+
 
 ## Link
 > * Docker image: [https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging](https://hub.docker.com/r/thxwelchs/kinesis-lambda-logging)
