@@ -4,11 +4,11 @@ console.log('Loading function');
 
 
 const s3 = new AWS.S3({
-  endpoint: 'http://192.168.99.100:4572',
-  s3ForcePathStyle: true,
+  endpoint: process.env.LAMBDA_ENDPOINT || `lambda.${process.env.AWS_REGION}.amazonaws.com`,
+  s3ForcePathStyle: process.env.LAMBDA_ENDPOINT ? true : false,
 })
 
-const BUCKET_NAME = 'my-bucket'
+const BUCKET_NAME = process.env.BUCKET_NAME || ''
 
 exports.handler = async (event, context) => {
     /* Process the list of records and transform them */
@@ -37,7 +37,10 @@ exports.handler = async (event, context) => {
     //     }
     // });
     // console.log(`Processing completed.  Successful records ${output.length}.`);
-    // return { records: output };
+    return {
+      endpoint: process.env.LAMBDA_ENDPOINT || `lambda.${process.env.AWS_REGION}.amazonaws.com`,
+      s3ForcePathStyle: process.env.LAMBDA_ENDPOINT ? true : false,
+    };
 };
 
 
